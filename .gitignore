@@ -1,0 +1,46 @@
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# IDEs
+.idea/
+.vscode/
+*.iml
+*.swp
+*.swo
+
+# Node / Vite Frontend
+news-analyser-frontend/node_modules/
+news-analyser-frontend/dist/
+news-analyser-frontend/dist-ssr/
+news-analyser-frontend/*.local
+notes.txt
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Spring Boot Maven Backend
+news-analyser-backend/target/
+news-analyser-backend/!**/src/main/**/target/
+news-analyser-backend/!**/src/test/**/target/
+*.class
+*.log
+*.jar
+*.war
+*.nar
+*.ear
+*.zip
+*.tar.gz
+*.rar
+
+# Environment files
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local

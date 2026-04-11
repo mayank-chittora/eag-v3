@@ -1,0 +1,21 @@
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:newsanalyser}
+    username: ${DB_USERNAME:postgres}
+    password: ${DB_PASSWORD:secret}
+    hikari:
+      maximum-pool-size: 5
+      minimum-idle: 2
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+  cache:
+    type: caffeine
+  caffeine:
+    spec: maximumSize=500,expireAfterWrite=30m
+
+logging:
+  level:
+    com.newsanalyser: DEBUG
+    org.springframework.scheduling: DEBUG
