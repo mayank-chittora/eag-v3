@@ -1,0 +1,206 @@
+/* content/content.css — Reading Assistant tooltip (inside open Shadow DOM) */
+
+/* ─── Floating Action Button ────────────────────────────────────────────────── */
+
+#ra-fab {
+  position:       fixed;
+  bottom:         24px;
+  right:          24px;
+  width:          52px;
+  height:         52px;
+  border-radius:  50%;
+  background:     #ffffff;
+  box-shadow:     0 4px 16px rgba(0,0,0,0.18), 0 1px 4px rgba(0,0,0,0.10);
+  display:        flex;
+  align-items:    center;
+  justify-content: center;
+  pointer-events: all;
+  cursor:         default;
+  user-select:    none;
+  z-index:        2147483646;
+  transition:     transform 160ms ease, box-shadow 160ms ease;
+}
+
+#ra-fab:hover {
+  transform:  scale(1.07);
+  box-shadow: 0 6px 24px rgba(0,0,0,0.22), 0 2px 6px rgba(0,0,0,0.12);
+}
+
+#ra-fab svg {
+  width:  26px;
+  height: 26px;
+}
+
+/* ─── Tooltip Container (Speech Bubble) ─────────────────────────────────────── */
+
+#ra-tooltip {
+  position:       fixed;
+  display:        none;
+  pointer-events: all;
+  width:          340px;
+
+  background:    #ffffff;
+  border:        1.5px solid #dde3ed;
+  border-radius: 20px;
+  box-shadow:    0 16px 48px rgba(0,0,0,0.20), 0 4px 16px rgba(0,0,0,0.12), 0 1px 4px rgba(0,0,0,0.08);
+  overflow:      visible; /* Critical: lets tail pseudo-elements show outside the box */
+
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-size:   14px;
+  line-height: 1.6;
+  color:       #1a1a1a;
+
+  animation: ra-in 180ms cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes ra-in {
+  from { opacity: 0; transform: translateY(12px) scale(0.95); }
+  to   { opacity: 1; transform: translateY(0)    scale(1);   }
+}
+
+/* ─── Speech Bubble Tail ─────────────────────────────────────────────────────── */
+
+/* Shared for both ::before and ::after in either direction */
+#ra-tooltip.tail-down::before, #ra-tooltip.tail-down::after,
+#ra-tooltip.tail-up::before,   #ra-tooltip.tail-up::after {
+  content:   '';
+  position:  absolute;
+  width:     0;
+  height:    0;
+  left:      var(--tail-left, 50%);
+  transform: translateX(-50%);
+}
+
+/* Tail pointing DOWN (bubble is above the selection) */
+#ra-tooltip.tail-down::before {
+  bottom:      -12px;
+  border:      11px solid transparent;
+  border-top:  11px solid #dde3ed;
+  border-bottom: none;
+}
+
+#ra-tooltip.tail-down::after {
+  bottom:      -10px;
+  border:      10px solid transparent;
+  border-top:  10px solid #ffffff;
+  border-bottom: none;
+  z-index:     1;
+}
+
+/* Tail pointing UP (bubble is below the selection) */
+#ra-tooltip.tail-up::before {
+  top:            -12px;
+  border:         11px solid transparent;
+  border-bottom:  11px solid #dde3ed;
+  border-top:     none;
+}
+
+#ra-tooltip.tail-up::after {
+  top:            -10px;
+  border:         10px solid transparent;
+  border-bottom:  10px solid #ffffff;
+  border-top:     none;
+  z-index:        1;
+}
+
+/* ─── Header ──────────────────────────────────────────────────────────────────── */
+
+#ra-header {
+  display:         flex;
+  align-items:     center;
+  justify-content: space-between;
+  padding:         12px 16px 10px;
+  border-bottom:   1px solid #eef0f5;
+  border-radius:   20px 20px 0 0;
+  background:      #ffffff;
+  position:        sticky;
+  top:             0;
+}
+
+#ra-title {
+  font-size:      10.5px;
+  font-weight:    700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color:          #8a96a8;
+}
+
+#ra-close:hover { color: #4a5568; background: #e8ecf2; }
+
+/* ─── Body ────────────────────────────────────────────────────────────────────── */
+
+#ra-body {
+  padding:       14px 16px 16px;
+  border-radius: 0 0 18px 18px;
+}
+
+/* ─── Bullet List ─────────────────────────────────────────────────────────────── */
+
+#ra-list {
+  list-style: none;
+  margin:  0;
+  padding: 0;
+}
+
+#ra-list li {
+  position:      relative;
+  padding:       8px 0 8px 20px;
+  border-bottom: 1px solid #eef0f5;
+  color:         #2d3748;
+  font-size:     13.5px;
+  line-height:   1.65;
+  word-wrap:     break-word;
+}
+
+#ra-list li:last-child { border-bottom: none; padding-bottom: 0; }
+
+#ra-list li::before {
+  content:     '•';
+  position:    absolute;
+  left:        2px;
+  color:       #4d90fe;
+  font-weight: 700;
+  font-size:   16px;
+  line-height: 1.4;
+}
+
+/* ─── Loading Skeleton ────────────────────────────────────────────────────────── */
+
+.sk {
+  height:          11px;
+  border-radius:   5px;
+  margin:          9px 0;
+  background:      linear-gradient(90deg, #f0f2f5 25%, #e4e8ee 50%, #f0f2f5 75%);
+  background-size: 300% 100%;
+  animation:       ra-shimmer 1.4s infinite ease-in-out;
+}
+
+.sk-full { width: 100%; }
+.sk-3q   { width: 75%;  }
+.sk-half { width: 50%;  }
+
+@keyframes ra-shimmer {
+  0%   { background-position:  100% 0; }
+  100% { background-position: -100% 0; }
+}
+
+/* ─── Error ───────────────────────────────────────────────────────────────────── */
+
+#ra-error {
+  color:         #c53030;
+  background:    #fff5f5;
+  border:        1px solid #fed7d7;
+  border-radius: 8px;
+  padding:       9px 11px;
+  font-size:     13px;
+  line-height:   1.5;
+  word-wrap:     break-word;
+}
+
+/* ─── Reduced Motion ──────────────────────────────────────────────────────────── */
+
+@media (prefers-reduced-motion: reduce) {
+  #ra-tooltip { animation: none; }
+  #ra-fab     { transition: none; }
+  .sk         { animation: none; background: #e8ecf2; }
+}
