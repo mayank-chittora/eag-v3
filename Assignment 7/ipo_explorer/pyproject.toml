@@ -1,0 +1,21 @@
+[project]
+name = "ipo-explorer"
+version = "0.1.0"
+requires-python = ">=3.11"
+dependencies = [
+    "fastapi>=0.111",
+    "uvicorn[standard]>=0.30",
+    "mcp[cli]",
+    "httpx",
+    "pydantic>=2.13",
+    "faiss-cpu>=1.8",
+    "numpy>=1.26",
+    "crawl4ai",
+    "ddgs",
+    "tavily-python",
+    "python-dotenv",
+]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

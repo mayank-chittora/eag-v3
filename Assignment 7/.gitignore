@@ -1,0 +1,38 @@
+# Environment & secrets
+.env
+*.env
+
+# Python
+__pycache__/
+*.py[cod]
+*.pyo
+.venv/
+venv/
+*.egg-info/
+dist/
+build/
+
+# Runtime state (generated at run time, not source)
+agent_core/state/memory.json
+agent_core/state/index.faiss
+agent_core/state/index_ids.json
+agent_core/state/artifacts/
+ipo_explorer/state/
+
+# Databases
+*.db
+*.sqlite
+*.sqlite3
+
+# Node
+node_modules/
+
+# macOS
+.DS_Store
+
+# IDE
+.vscode/
+.idea/
+
+# uv lock artifacts (keep pyproject.toml, optionally keep lock)
+# uv.lock  ← keep this so installs are reproducible

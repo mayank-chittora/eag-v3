@@ -1,0 +1,21 @@
+# secrets / env
+.env
+.env.*
+!.env.example
+
+# runtime state
+state/
+usage.json
+
+# sandbox: exclude user-created files but keep source papers
+sandbox/*
+!sandbox/papers/
+
+# python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+
+# os
+.DS_Store

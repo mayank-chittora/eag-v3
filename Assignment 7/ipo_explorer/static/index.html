@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>IPO RAG — Indian IPO Explorer</title>
+  <link rel="stylesheet" href="/static/style.css" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+</head>
+<body>
+
+<!-- Stage 1: Welcome -->
+<section id="stage-welcome" class="stage active">
+  <div class="welcome-bg"></div>
+  <div class="welcome-content">
+    <div class="logo">📈</div>
+    <h1>Indian IPO Explorer</h1>
+    <p>Ask anything about Indian IPOs. The agent indexes company websites and answers using RAG — with full visibility into every reasoning step.</p>
+    <div class="stats-pills">
+      <div class="pill"><span>63</span> IPOs indexed</div>
+      <div class="pill"><span>2020 – 2024</span> coverage</div>
+      <div class="pill"><span>FAISS</span> vector search</div>
+      <div class="pill"><span>S7</span> agent loop</div>
+      <div class="pill"><span>Live</span> iteration trace</div>
+    </div>
+    <button class="btn-primary" id="btn-start">Get Started →</button>
+  </div>
+</section>
+
+<!-- Stage 2: Setup + Indexing -->
+<section id="stage-setup" class="stage">
+  <div class="setup-card">
+    <h2>📂 Set up your corpus</h2>
+    <p>Choose the IPO timeframe to index. Company websites and metadata will be loaded into the vector knowledge base.</p>
+
+    <div class="form-row">
+      <div class="form-group">
+        <label>From year</label>
+        <input type="number" id="start-year" value="2022" min="2019" max="2024" />
+      </div>
+      <div class="form-group">
+        <label>To year</label>
+        <input type="number" id="end-year" value="2024" min="2019" max="2024" />
+      </div>
+    </div>
+
+    <button class="btn-primary" id="btn-index" style="width:100%">Index IPOs</button>
+
+    <div class="cached-notice" id="cached-notice">
+      ✓ Index already built — using cached data
+    </div>
+
+    <div class="progress-section" id="progress-section">
+      <div class="progress-header">
+        <span class="progress-label">Indexing companies…</span>
+        <span class="progress-count" id="progress-count">0 / 0</span>
+      </div>
+      <div class="progress-bar-track">
+        <div class="progress-bar-fill" id="progress-bar"></div>
+      </div>
+      <div class="progress-ticker" id="progress-ticker">Starting…</div>
+
+      <div class="stats-card" id="stats-card">
+        <h4>Corpus ready</h4>
+        <div class="stats-row">
+          <div class="stat-item">
+            <div class="num" id="stat-companies">—</div>
+            <div class="label">Companies</div>
+          </div>
+          <div class="stat-item">
+            <div class="num" id="stat-pages">—</div>
+            <div class="label">Pages</div>
+          </div>
+          <div class="stat-item">
+            <div class="num" id="stat-chunks">—</div>
+            <div class="label">Chunks</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stage 3: Chat -->
+<section id="stage-chat" class="stage">
+  <header class="chat-header">
+    <div class="chat-header-left">
+      <span class="chat-logo">📈</span>
+      <span class="chat-title">Indian IPO Explorer</span>
+      <span class="chat-corpus-badge" id="corpus-badge">Loading…</span>
+    </div>
+    <div class="chat-header-right">
+      <span class="corpus-stats" id="corpus-stats-bar"></span>
+    </div>
+  </header>
+
+  <div class="chat-messages" id="chat-messages">
+    <!-- Suggested chips -->
+    <div class="chip-bar" id="chip-bar">
+      <div class="chip" data-q="Which IPO companies are in digital payments or fintech?">💳 Fintech IPOs</div>
+      <div class="chip" data-q="Which companies focused on rural India or tier-2/3 cities?">🌾 Rural focus</div>
+      <div class="chip" data-q="What were the biggest listing gains among the indexed IPOs?">🚀 Best listing gains</div>
+      <div class="chip" data-q="Which technology companies had IPOs and what products do they offer?">💻 Tech IPOs</div>
+      <div class="chip" data-q="Compare the business models of Paytm and Zomato">⚖️ Paytm vs Zomato</div>
+    </div>
+  </div>
+
+  <div class="chat-input-area">
+    <div class="error-banner" id="error-banner"></div>
+    <div class="input-row">
+      <textarea class="chat-input" id="chat-input" rows="1"
+        placeholder="Ask about any Indian IPO…"></textarea>
+      <button class="send-btn" id="send-btn" title="Send">➤</button>
+    </div>
+  </div>
+</section>
+
+<script src="/static/app.js"></script>
+</body>
+</html>
