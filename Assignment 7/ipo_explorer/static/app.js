@@ -23,6 +23,9 @@ function goTo(stage) {
   currentStage = stage;
 }
 
+// Set end-date default to today
+document.getElementById('end-date').value = '2024-11-13';
+
 // ── Stage 1 → 2 ──────────────────────────────────────────────────────────────
 document.getElementById('btn-start').addEventListener('click', () => goTo('SETUP'));
 
@@ -30,10 +33,10 @@ document.getElementById('btn-start').addEventListener('click', () => goTo('SETUP
 document.getElementById('btn-index').addEventListener('click', startIndexing);
 
 async function startIndexing() {
-  const startYear = parseInt(document.getElementById('start-year').value, 10);
-  const endYear = parseInt(document.getElementById('end-year').value, 10);
-  if (isNaN(startYear) || isNaN(endYear) || startYear > endYear) {
-    alert('Invalid year range');
+  const startDate = document.getElementById('start-date').value;
+  const endDate = document.getElementById('end-date').value;
+  if (!startDate || !endDate || startDate > endDate) {
+    alert('Invalid date range');
     return;
   }
 
@@ -46,7 +49,7 @@ async function startIndexing() {
     res = await fetch('/api/index', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ start_year: startYear, end_year: endYear }),
+      body: JSON.stringify({ start_date: startDate, end_date: endDate }),
     });
   } catch (e) {
     alert('Server error: ' + e.message);
@@ -56,6 +59,14 @@ async function startIndexing() {
   }
 
   const data = await res.json();
+
+  if (!res.ok) {
+    const msg = data?.detail || data?.message || 'Server error';
+    alert('Indexing failed: ' + msg);
+    btn.disabled = false;
+    btn.textContent = 'Index IPOs';
+    return;
+  }
 
   if (data.cached) {
     // Already indexed — flash notice and go to chat

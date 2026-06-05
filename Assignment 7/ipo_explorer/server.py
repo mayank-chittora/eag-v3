@@ -35,7 +35,7 @@ sys.path.insert(0, str(_S7))
 
 from gateway import ensure_gateway  # noqa: E402
 
-from corpus import CORPUS, filter_by_timeframe  # noqa: E402
+from corpus import CORPUS, CORPUS_MAX_DATE, get_ipos_for_range  # noqa: E402
 from indexer import (  # noqa: E402
     get_cached_stats,
     index_corpus,
@@ -74,8 +74,8 @@ app.mount("/static", StaticFiles(directory=str(_STATIC)), name="static")
 # ── Request / Response models ─────────────────────────────────────────────────
 
 class IndexRequest(BaseModel):
-    start_year: int = 2022
-    end_year: int = 2024
+    start_date: str = "2024-01-01"
+    end_date: str = ""  # empty = today; filled server-side
 
 
 class QueryRequest(BaseModel):
@@ -154,11 +154,22 @@ async def start_index(req: IndexRequest):
     Returns {job_id, ipo_count, cached}.
     If cached, no background task is started — frontend skips the stream.
     """
-    records = filter_by_timeframe(req.start_year, req.end_year)
-    if not records:
-        raise HTTPException(400, f"No IPOs found for {req.start_year}–{req.end_year}")
+    from datetime import date as _date
+    end_date = req.end_date or str(_date.today())
+    start_date = req.start_date
 
-    cached = is_cached(req.start_year, req.end_year)
+    try:
+        records = await get_ipos_for_range(start_date, end_date)
+    except Exception as e:
+        raise HTTPException(500, f"Failed to fetch IPO data: {e}") from e
+    if not records:
+        raise HTTPException(
+            400,
+            f"No IPOs found for {start_date} – {end_date}. "
+            f"Static corpus covers up to {CORPUS_MAX_DATE}; try a range within 2019–2024.",
+        )
+
+    cached = is_cached(start_date, end_date)
     job_id = uuid.uuid4().hex[:12]
 
     if not cached:
@@ -179,7 +190,7 @@ async def start_index(req: IndexRequest):
         async def _run():
             try:
                 stats = await index_corpus(records, progress_callback=_progress_cb)
-                _save_indexed_timeframe(req.start_year, req.end_year, stats)
+                _save_indexed_timeframe(start_date, end_date, stats)
                 q.put_nowait({
                     "event": "stats",
                     "companies_indexed": stats["companies_indexed"],
@@ -204,7 +215,7 @@ async def index_stream(job_id: str):
         raise HTTPException(404, "Job not found")
 
     async def generate():
-        async for chunk in _drain_queue(q):
+        async for chunk in _drain_queue(q, timeout=900.0):
             yield chunk
         _index_jobs.pop(job_id, None)
 

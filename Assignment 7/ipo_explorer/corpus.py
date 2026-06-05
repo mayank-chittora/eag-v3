@@ -1046,12 +1046,30 @@ CORPUS: list[IPORecord] = [
 ]
 
 
-def filter_by_timeframe(start_year: int, end_year: int) -> list[IPORecord]:
-    """Return IPOs whose ipo_date falls within [start_year, end_year] inclusive."""
-    return [
-        r for r in CORPUS
-        if start_year <= int(r.ipo_date[:4]) <= end_year
-    ]
+def filter_by_timeframe(start_date: str, end_date: str) -> list[IPORecord]:
+    """Return IPOs whose ipo_date falls within [start_date, end_date] inclusive."""
+    return [r for r in CORPUS if start_date <= r.ipo_date <= end_date]
+
+
+CORPUS_MAX_DATE = max(r.ipo_date for r in CORPUS)
+
+
+async def get_ipos_for_range(start_date: str, end_date: str) -> list[IPORecord]:
+    """Return IPOs for [start_date, end_date], supplementing with live web data when
+    end_date exceeds the static corpus coverage."""
+    static = filter_by_timeframe(start_date, end_date)
+
+    if end_date > CORPUS_MAX_DATE:
+        try:
+            from fetcher import fetch_mainboard_ipos, _to_ipo_records
+            raw = await fetch_mainboard_ipos()
+            live = _to_ipo_records(raw, start_date, end_date)
+            existing_symbols = {r.symbol for r in static}
+            static = static + [r for r in live if r.symbol not in existing_symbols]
+        except Exception as e:
+            print(f"[corpus] live fetch failed, using static only: {e!r}")
+
+    return static
 
 
 def get_by_symbol(symbol: str) -> IPORecord | None:

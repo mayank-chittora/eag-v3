@@ -178,7 +178,7 @@ def observe(
             "name": "PerceptionOutput",
             "strict": True,
         },
-        temperature=1.0,
+        temperature=0.4,
     )
 
     parsed = reply.get("parsed")

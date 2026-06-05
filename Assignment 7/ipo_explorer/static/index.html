@@ -19,7 +19,7 @@
     <p>Ask anything about Indian IPOs. The agent indexes company websites and answers using RAG — with full visibility into every reasoning step.</p>
     <div class="stats-pills">
       <div class="pill"><span>63</span> IPOs indexed</div>
-      <div class="pill"><span>2020 – 2024</span> coverage</div>
+      <div class="pill"><span>2019 – present</span> coverage</div>
       <div class="pill"><span>FAISS</span> vector search</div>
       <div class="pill"><span>S7</span> agent loop</div>
       <div class="pill"><span>Live</span> iteration trace</div>
@@ -36,15 +36,16 @@
 
     <div class="form-row">
       <div class="form-group">
-        <label>From year</label>
-        <input type="number" id="start-year" value="2022" min="2019" max="2024" />
+        <label>From date</label>
+        <input type="date" id="start-date" value="2024-01-01" min="2019-01-01" />
       </div>
       <div class="form-group">
-        <label>To year</label>
-        <input type="number" id="end-year" value="2024" min="2019" max="2024" />
+        <label>To date</label>
+        <input type="date" id="end-date" min="2019-01-01" />
       </div>
     </div>
 
+    <p class="form-hint">Static corpus: 2019 – 2024-11-13. Dates beyond this fetch live data from NSE.</p>
     <button class="btn-primary" id="btn-index" style="width:100%">Index IPOs</button>
 
     <div class="cached-notice" id="cached-notice">

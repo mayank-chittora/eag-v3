@@ -46,7 +46,7 @@ from gateway import ensure_gateway                     # noqa: E402
 from schemas import Goal                               # noqa: E402
 
 MCP_SERVER = _HERE / "mcp_server.py"
-MAX_ITERATIONS = 20
+MAX_ITERATIONS = 12
 
 EventCallback = Callable[[dict], None] | None
 
@@ -155,6 +155,10 @@ async def run(query: str, callback: EventCallback = None) -> str:
                         "text": out.answer,
                     })
                     final_answer = out.answer
+                    # Short-circuit: if this was the last unfinished goal, exit now
+                    # rather than waiting for Perception to confirm in the next iteration.
+                    if not any(g for g in obs.goals if not g.done and g.id != goal.id):
+                        break
                     continue
 
                 # 4. ACTION

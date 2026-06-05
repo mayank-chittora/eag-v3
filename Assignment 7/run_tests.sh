@@ -47,7 +47,10 @@ depends_on_prior_run() {
 }
 
 # ── load queries via python ──────────────────────────────────────────────────
-mapfile -t QUERY_LINES < <("$PYTHON" - "$QUERIES_FILE" "$ONLY_IDS" <<'EOF'
+QUERY_LINES=()
+while IFS= read -r _ql; do
+    QUERY_LINES+=("$_ql")
+done < <("$PYTHON" - "$QUERIES_FILE" "$ONLY_IDS" <<'EOF'
 import json, sys
 path = sys.argv[1]
 only = set(x.strip().upper() for x in sys.argv[2].split(",")) if sys.argv[2] else set()
@@ -67,7 +70,9 @@ if [[ ${#QUERY_LINES[@]} -eq 0 ]]; then
 fi
 
 # ── run loop ─────────────────────────────────────────────────────────────────
-declare -A RESULTS  # key = "id-run", value = PASS|FAIL
+# bash 3.2 compatible results store (parallel arrays)
+RESULT_KEYS=()
+RESULT_VALS=()
 PASS=0
 FAIL=0
 
@@ -93,10 +98,12 @@ for line in "${QUERY_LINES[@]}"; do
     set -e
 
     if [[ $EXIT_CODE -eq 0 ]]; then
-        RESULTS[$KEY]="PASS"
+        RESULT_KEYS+=("$KEY")
+        RESULT_VALS+=("PASS")
         ((PASS++)) || true
     else
-        RESULTS[$KEY]="FAIL (exit $EXIT_CODE)"
+        RESULT_KEYS+=("$KEY")
+        RESULT_VALS+=("FAIL (exit $EXIT_CODE)")
         ((FAIL++)) || true
     fi
 done
@@ -106,8 +113,10 @@ echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "  RESULTS"
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
-for key in "${!RESULTS[@]}"; do
-    printf "  %-15s %s\n" "$key" "${RESULTS[$key]}"
+_ri=0
+while [[ $_ri -lt ${#RESULT_KEYS[@]} ]]; do
+    printf "  %-15s %s\n" "${RESULT_KEYS[$_ri]}" "${RESULT_VALS[$_ri]}"
+    ((_ri++)) || true
 done | sort
 echo ""
 printf "  Total: %d passed, %d failed\n" "$PASS" "$FAIL"

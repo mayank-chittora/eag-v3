@@ -51,20 +51,20 @@ def _load_indexed_timeframes() -> dict:
     return {}
 
 
-def _save_indexed_timeframe(start_year: int, end_year: int, stats: dict) -> None:
+def _save_indexed_timeframe(start_date: str, end_date: str, stats: dict) -> None:
     data = _load_indexed_timeframes()
-    key = f"{start_year}-{end_year}"
+    key = f"{start_date}_{end_date}"
     data[key] = {**stats, "indexed_at": datetime.now().isoformat()}
     _TIMEFRAME_FILE.write_text(json.dumps(data, indent=2))
 
 
-def is_cached(start_year: int, end_year: int) -> bool:
-    key = f"{start_year}-{end_year}"
+def is_cached(start_date: str, end_date: str) -> bool:
+    key = f"{start_date}_{end_date}"
     return key in _load_indexed_timeframes()
 
 
-def get_cached_stats(start_year: int, end_year: int) -> dict | None:
-    key = f"{start_year}-{end_year}"
+def get_cached_stats(start_date: str, end_date: str) -> dict | None:
+    key = f"{start_date}_{end_date}"
     return _load_indexed_timeframes().get(key)
 
 
