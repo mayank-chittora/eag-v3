@@ -232,7 +232,7 @@ cd "/Users/mayankchittora/Documents/EAG V3/Assignment 7"
 
 > Results are shown in the YouTube video attached below.
 
-- [IPO Explorer Demo]()
+- [IPO Explorer Demo](https://youtu.be/VMJY3HWHOJY)
 
 | # | Query |
 |---|-------|
