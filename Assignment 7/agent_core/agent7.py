@@ -72,7 +72,15 @@ async def run(query: str) -> str:
     except Exception as e:
         print(f"[memory.remember] skipped: {e}")
 
-    server_params = StdioServerParameters(command=sys.executable, args=[str(MCP_SERVER)])
+    import os
+    env = os.environ.copy()
+    env["PYTHONUTF8"] = "1"
+    env["PYTHONIOENCODING"] = "utf-8"
+    server_params = StdioServerParameters(
+        command=sys.executable,
+        args=[str(MCP_SERVER)],
+        env=env
+    )
     history: list[dict] = []
     prior_goals: list[Goal] = []
     final_answer: str = ""

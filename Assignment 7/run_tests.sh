@@ -11,7 +11,13 @@ set -euo pipefail
 
 SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 QUERIES_FILE="$SCRIPT_DIR/Test Queries.json"
-PYTHON="$SCRIPT_DIR/agent_core/.venv/bin/python3"
+if [[ -f "$SCRIPT_DIR/agent_core/.venv/Scripts/python.exe" ]]; then
+    PYTHON="$SCRIPT_DIR/agent_core/.venv/Scripts/python.exe"
+elif [[ -f "$SCRIPT_DIR/agent_core/.venv/Scripts/python" ]]; then
+    PYTHON="$SCRIPT_DIR/agent_core/.venv/Scripts/python"
+else
+    PYTHON="$SCRIPT_DIR/agent_core/.venv/bin/python3"
+fi
 AGENT="$SCRIPT_DIR/agent_core/agent7.py"
 STATE_DIR="$SCRIPT_DIR/agent_core/state"
 

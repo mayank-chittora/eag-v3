@@ -186,29 +186,42 @@ def main() -> None:
         help="Year range in format START-END, e.g. 2022-2024",
     )
     parser.add_argument("--force", action="store_true", help="Re-index even if cached")
+    parser.add_argument("--symbol", help="Only index a specific symbol")
     args = parser.parse_args()
 
-    try:
-        start_str, end_str = args.years.split("-")
-        start_year, end_year = int(start_str), int(end_str)
-    except ValueError:
-        print(f"Invalid --years format: {args.years!r}. Use e.g. 2022-2024")
-        sys.exit(1)
+    if args.symbol:
+        from corpus import get_by_symbol
+        record = get_by_symbol(args.symbol)
+        if not record:
+            print(f"Symbol {args.symbol} not found in corpus.")
+            sys.exit(1)
+        records = [record]
+        print(f"IPO corpus: single company {record.symbol} ({record.company})")
+    else:
+        try:
+            start_str, end_str = args.years.split("-")
+            start_year, end_year = int(start_str), int(end_str)
+        except ValueError:
+            print(f"Invalid --years format: {args.years!r}. Use e.g. 2022-2024")
+            sys.exit(1)
 
-    records = filter_by_timeframe(start_year, end_year)
-    print(f"IPO corpus: {len(records)} companies from {start_year} to {end_year}")
+        start_date = f"{start_year}-01-01"
+        end_date = f"{end_year}-12-31"
+        records = filter_by_timeframe(start_date, end_date)
+        print(f"IPO corpus: {len(records)} companies from {start_year} to {end_year}")
 
-    if not args.force and is_cached(start_year, end_year):
-        cached = get_cached_stats(start_year, end_year)
-        print(f"Already indexed: {cached}")
-        return
+        if not args.force and is_cached(start_year, end_year):
+            cached = get_cached_stats(start_year, end_year)
+            print(f"Already indexed: {cached}")
+            return
 
     from gateway import ensure_gateway
     ensure_gateway()
 
     print(f"Indexing {len(records)} companies...")
     stats = asyncio.run(index_corpus(records))
-    _save_indexed_timeframe(start_year, end_year, stats)
+    if not args.symbol:
+        _save_indexed_timeframe(start_year, end_year, stats)
     print(
         f"\nDone: {stats['companies_indexed']} companies | "
         f"{stats['pages_fetched']} pages | "

@@ -40,11 +40,16 @@ def ensure_gateway() -> None:
             "Build llm_gatewayV7 (Session 7 prerequisite) before running S7 code."
         )
     print(f"[gateway] launching llm_gatewayV7 from {GATEWAY_V7_DIR}")
+    import os
+    env = os.environ.copy()
+    env["PYTHONUTF8"] = "1"
+    env["PYTHONIOENCODING"] = "utf-8"
     subprocess.Popen(
         ["uv", "run", "main.py"],
         cwd=str(GATEWAY_V7_DIR),
         stdout=subprocess.DEVNULL,
         stderr=subprocess.DEVNULL,
+        env=env,
     )
     for _ in range(45):
         time.sleep(1)

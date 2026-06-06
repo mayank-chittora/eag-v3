@@ -80,7 +80,15 @@ async def run(query: str, callback: EventCallback = None) -> str:
     except Exception as e:
         print(f"[memory.remember] skipped: {e}")
 
-    server_params = StdioServerParameters(command=sys.executable, args=[str(MCP_SERVER)])
+    import os
+    env = os.environ.copy()
+    env["PYTHONUTF8"] = "1"
+    env["PYTHONIOENCODING"] = "utf-8"
+    server_params = StdioServerParameters(
+        command=sys.executable,
+        args=[str(MCP_SERVER)],
+        env=env
+    )
     history: list[dict] = []
     prior_goals: list[Goal] = []
     final_answer: str = ""
@@ -89,6 +97,8 @@ async def run(query: str, callback: EventCallback = None) -> str:
         async with ClientSession(read, write) as session:
             await session.initialize()
             mcp_tools = (await session.list_tools()).tools
+            # Exclude web_search and fetch_url to force reliance on the local index (RAG)
+            mcp_tools = [t for t in mcp_tools if t.name not in ("web_search", "fetch_url")]
             tools_for_decision = _mcp_tools_for_decision(mcp_tools)
             print(f"[mcp] loaded {len(mcp_tools)} tools: {[t.name for t in mcp_tools]}")
 

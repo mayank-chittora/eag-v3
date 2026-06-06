@@ -211,20 +211,20 @@ cd "/Users/mayankchittora/Documents/EAG V3/Assignment 7"
 
 ## Test Query Results
 
-> Results will be added after running the full test suite.
+> The complete execution logs and results for all test queries are documented in [Test Queries Results.txt](Test%20Queries%20Results.txt).
 
-| Query | ID | Expected Iterations | Actual Iterations | Result | Notes |
-|-------|----|--------------------:|------------------:|--------|-------|
-| Fetch Wikipedia + extract facts | A-run-1 | 3 | — | — | |
-| Tokyo weekend activities + weather | B-run-1 | 8 | — | — | |
-| Save birthday reminder | C-run-1 | 4 | — | — | |
-| Recall birthday from memory | C-run-2 | 3 | — | — | Memory persistence test |
-| Search asyncio best practices | D-run-1 | 6 | — | — | |
-| Index attention.md + extract | E-run-1 | 5 | — | — | |
-| Index all papers + count chunks | F-run-1 | 11 | — | — | |
-| Query indexed papers (CoT) | F-run-2 | 3 | — | — | Knowledge base test |
-| Cross-paper: credit assignment | G-run-1 | 4 | — | — | Requires F-run-1 |
-| Compare ReAct vs CoT papers | H-run-1 | 3 | — | — | Requires F-run-1 |
+| Query | ID | Expected Iterations | Actual Iterations | Notes |
+|-------|----|--------------------:|------------------:|-------|
+| Fetch Wikipedia + extract facts | A-run-1 | 3 | 3 | |
+| Tokyo weekend activities + weather | B-run-1 | 8 | 5 | |
+| Save birthday reminder | C-run-1 | 4 | 4 | |
+| Recall birthday from memory | C-run-2 | 3 | 2 | Memory persistence test |
+| Search asyncio best practices | D-run-1 | 6 | 5 | |
+| Index attention.md + extract | E-run-1 | 5 | 5 | |
+| Index all papers + count chunks | F-run-1 | 11 | 9 | |
+| Query indexed papers (CoT) | F-run-2 | 3 | 4 | Knowledge base test |
+| Cross-paper: credit assignment | G-run-1 | 4 | 4 | Requires F-run-1 |
+| Compare ReAct vs CoT papers | H-run-1 | 3 | 5 | Requires F-run-1 |
 
 ---
 
@@ -241,46 +241,3 @@ cd "/Users/mayankchittora/Documents/EAG V3/Assignment 7"
 | 5 | | | |
 
 ---
-
-## Project Structure
-
-```
-Assignment 7/
-├── .env                          # API keys
-├── Makefile                      # Gateway + app orchestration
-├── run_tests.sh                  # Test runner script
-├── Test Queries.json             # 10 benchmark queries
-├── README.md
-│
-├── agent_core/                   # Core agent loop
-│   ├── agent7.py                 # Orchestrator (20-iteration loop)
-│   ├── perception.py             # Goal decomposition & lifecycle
-│   ├── memory.py                 # FAISS vector + keyword memory
-│   ├── decision.py               # Tool selection / answer generation
-│   ├── action.py                 # MCP tool dispatcher
-│   ├── artifacts.py              # Content-addressable byte store
-│   ├── gateway.py                # Gateway bridge + auto-start
-│   ├── mcp_server.py             # 11 MCP tools
-│   ├── vector_index.py           # FAISS wrapper (768-dim, cosine)
-│   ├── schemas.py                # Pydantic contracts
-│   ├── sandbox/papers/           # 5 ML research papers (.md)
-│   └── state/                    # memory.json, FAISS index, artifacts
-│
-├── gateway/                      # LLM Gateway V7
-│   ├── main.py                   # FastAPI app (port 8107)
-│   ├── router.py                 # Rate-limiting, tier failover
-│   ├── providers.py              # 7 LLM provider adapters
-│   ├── embedders.py              # Ollama + Gemini embedders
-│   ├── schemas.py                # ChatRequest / ChatResponse
-│   ├── db.py                     # SQLite call logging
-│   ├── cache.py                  # Gemini prompt caching
-│   └── static/                   # Dashboard + help UI
-│
-└── ipo_explorer/                 # IPO RAG web app
-    ├── server.py                 # FastAPI backend (port 8200)
-    ├── agent.py                  # agent_core wrapper with SSE hooks
-    ├── corpus.py                 # 63 Indian IPOs (2020–2024)
-    ├── indexer.py                # Corpus indexing pipeline
-    ├── mcp_server.py             # 12 tools (11 + index_ipo_company)
-    └── static/                   # index.html, app.js, style.css
-```

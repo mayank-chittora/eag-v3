@@ -1,0 +1,32 @@
+[
+    {
+        "id": "IPO-A",
+        "run": 1,
+        "expected_iterations": 3,
+        "query": "Based on the indexed IPO corpus (do not search the web, only retrieve facts from search_knowledge), which company manufactures environmentally conscious materials for internal design or construction without harmful aldehydes?"
+    },
+    {
+        "id": "IPO-B",
+        "run": 1,
+        "expected_iterations": 4,
+        "query": "Based on the indexed IPO corpus (do not search the web, only retrieve facts from search_knowledge), which business provides sustainable two-wheeled transportation options for environment-minded city travelers in Bharat?"
+    },
+    {
+        "id": "IPO-C",
+        "run": 1,
+        "expected_iterations": 3,
+        "query": "Based on the indexed IPO corpus (do not search the web, only retrieve facts from search_knowledge), identify the diagnostic service provider operating radiology and pathology centers in government hospitals under public-private partnerships in rural Bharat."
+    },
+    {
+        "id": "IPO-D",
+        "run": 1,
+        "expected_iterations": 4,
+        "query": "Based on the indexed IPO corpus (do not search the web, only retrieve facts from search_knowledge), which specialty chemical company listed in 2021 had the highest percentage increase from its issue price to its listing price?"
+    },
+    {
+        "id": "IPO-E",
+        "run": 1,
+        "expected_iterations": 3,
+        "query": "Based on the indexed IPO corpus (do not search the web, only retrieve facts from search_knowledge), which corporate entity supplies mapping APIs and IoT fleet management tools to automotive manufacturers and government agencies in India?"
+    }
+]
