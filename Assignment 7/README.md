@@ -230,14 +230,16 @@ cd "/Users/mayankchittora/Documents/EAG V3/Assignment 7"
 
 ## IPO Explorer App — Query Results
 
-> Results will be added after running 5 representative queries on the app.
+> Results are shown in the YouTube video attached below.
 
-| # | Query | Answer Summary | Iterations |
-|---|-------|---------------|------------|
-| 1 | | | |
-| 2 | | | |
-| 3 | | | |
-| 4 | | | |
-| 5 | | | |
+- [IPO Explorer Demo]()
+
+| # | Query |
+|---|-------|
+| 1 | Based on the indexed IPO corpus, which company manufactures environmentally conscious materials for internal design or construction without harmful aldehydes? |
+| 2 | Based on the indexed IPO corpus, which business provides sustainable two-wheeled transportation options for environment-minded city travelers in Bharat? |
+| 3 | Based on the indexed IPO corpus, identify the diagnostic service provider operating radiology and pathology centers in government hospitals under public-private partnerships in rural Bharat. |
+| 4 | Based on the indexed IPO corpus, which specialty chemical company listed in 2021 had the highest percentage increase from its issue price to its listing price? |
+| 5 | Based on the indexed IPO corpus, which corporate entity supplies mapping APIs and IoT fleet management tools to automotive manufacturers and government agencies in India? |
 
 ---
