@@ -1,0 +1,52 @@
+[
+  {
+    "id": "hello",
+    "query": "Say hello.",
+    "expected_node_count": 2,
+    "expected_skills": ["planner", "formatter"],
+    "max_wall_clock_s": 10,
+    "answer_contains": [],
+    "description": "Minimum DAG — planner emits formatter directly, no tools called"
+  },
+  {
+    "id": "shannon",
+    "query": "Fetch https://en.wikipedia.org/wiki/Claude_Shannon and tell me his birth date, death date, and three key contributions to information theory.",
+    "expected_node_count": 4,
+    "expected_skills": ["planner", "researcher", "distiller", "formatter"],
+    "max_wall_clock_s": 120,
+    "answer_contains": ["1916", "2001", "information theory"],
+    "description": "Sequential DAG — researcher feeds distiller (critic auto-inserted), then formatter"
+  },
+  {
+    "id": "three_cities",
+    "query": "Find the populations of London, Paris, Berlin and tell me which two are closest in size.",
+    "expected_node_count": 7,
+    "expected_skills": ["planner", "researcher", "coder", "sandbox_executor", "formatter"],
+    "max_wall_clock_s": 150,
+    "parallel_layer_skills": ["researcher"],
+    "parallel_layer_count": 3,
+    "answer_contains": ["Berlin", "Paris"],
+    "description": "Parallel fan-out — three researchers run concurrently, then coder + sandbox_executor + formatter"
+  },
+  {
+    "id": "graceful_failure",
+    "query": "Read /nonexistent/path.txt and tell me what's in it.",
+    "expected_node_count": 2,
+    "expected_skills": ["planner", "formatter"],
+    "max_wall_clock_s": 15,
+    "answer_contains_any": ["not found", "does not exist", "cannot", "unable", "no file"],
+    "description": "Planner fails fast — emits formatter with a failure note, no tool dispatch"
+  },
+  {
+    "id": "resume",
+    "query": "For Lagos, Cairo, and Kinshasa, find current populations and growth rates and tell me which is growing fastest.",
+    "expected_node_count": 7,
+    "expected_skills": ["planner", "researcher", "coder", "sandbox_executor", "formatter"],
+    "max_wall_clock_s": 180,
+    "parallel_layer_skills": ["researcher"],
+    "parallel_layer_count": 3,
+    "answer_contains": ["Lagos", "growth"],
+    "description": "Resumable execution — run once, kill mid-flow, resume with --resume flag. Run manually.",
+    "skip_auto_run": true
+  }
+]
