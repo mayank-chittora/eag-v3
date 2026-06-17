@@ -128,9 +128,8 @@ uv run python flow.py "Compare 3 movies on IMDb in the Sci-Fi genre with IMDb ra
 
 **Results:**
 
-══════════════════════════════════════════════════════════════════════════════
 session s8-e31555c5  ─  query: Compare 3 movies on IMDb in the Sci-Fi genre with IMDb rating above 7.0.
-══════════════════════════════════════════════════════════════════════════════
+
 [n:1] planner            complete (6.9s)
 [n:2] browser            complete (37.1s)
 [n:3] distiller          complete (4.7s)
@@ -142,13 +141,13 @@ session s8-e31555c5  ─  query: Compare 3 movies on IMDb in the Sci-Fi genre wi
 [n:10] critic             complete (4.3s)
 [n:9] formatter          complete (5.2s)
 
-══════════════════════════════════════════════════════════════════════════════
+
 FINAL: Here is a comparison of three highly-rated Sci-Fi movies on IMDb:
 
 1. Inception (Rating: 8.8): A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.
 2. Interstellar (Rating: 8.7): When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.
 3. The Matrix (Rating: 8.7): When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the sh
-══════════════════════════════════════════════════════════════════════════════
+
 
 **Output Analysis:**
 Refer [Output Report](agent/code/state/sessions/s8-e31555c5/report.md)
