@@ -1,4 +1,4 @@
-# Assignment 9: Browser-Capable Growing DAG Multi-Agent Orchestrator
+# Browser-Capable Growing DAG Multi-Agent Orchestrator
 
 ## Overview
 
