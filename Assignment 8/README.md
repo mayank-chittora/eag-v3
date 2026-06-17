@@ -179,13 +179,13 @@ Assignment 8/
 
 These five queries cover the core architecture properties. Run them with `run_test_queries.py` or individually with `flow.py`.
 
-| ID | Description | Query | Expected Skills | Actual Skills | Output |
-|----|-------------|-------|-----------------|---------------|--------|
-| `hello` | Minimum DAG — planner emits formatter directly, no tools | `Say hello.` | planner → formatter | | |
-| `shannon` | Sequential DAG with Distiller + auto-inserted Critic | `Fetch https://en.wikipedia.org/wiki/Claude_Shannon and tell me his birth date, death date, and three key contributions to information theory.` | planner → researcher → distiller → critic → formatter | | |
-| `three_cities` | Parallel fan-out (3 researchers) + Coder + SandboxExecutor | `Find the populations of London, Paris, Berlin and tell me which two are closest in size.` | planner → researcher×3 → coder → sandbox_executor + formatter | | |
-| `graceful_failure` | Planner fails fast with a degenerate 2-node DAG | `Read /nonexistent/path.txt and tell me what's in it.` | planner → formatter | | |
-| `resume` | Resumable execution — kill mid-run, resume with `--resume` | `For Lagos, Cairo, and Kinshasa, find current populations and growth rates and tell me which is growing fastest.` | planner → researcher×3 → coder → sandbox_executor + formatter | | |
+| Description | Query | Expected Skills | Actual Skills | Output |
+|-------------|-------|-----------------|---------------|--------|
+| Minimum DAG — planner emits formatter directly, no tools | `Say hello.` | planner → formatter | planner → formatter | `Hello! How can I help you today?` |
+| Sequential DAG with Distiller + auto-inserted Critic | `Fetch https://en.wikipedia.org/wiki/Claude_Shannon and tell me his birth date, death date, and three key contributions to information theory.` | planner → researcher → distiller → critic → formatter | planner → researcher → distiller → critic → formatter | `Claude Shannon was born on April 30, 1916, and passed away on February 24, 2001. His three key contributions to information theory include: 1) The development of information theory through his seminal paper 'A Mathematical Theory of Communication'; 2) The establishment of the 'bit' as the fundamental unit of information; and 3) The application of Boolean logic to the design of digital circuits.` |
+| Parallel fan-out (3 researchers) + Coder + SandboxExecutor | `Find the populations of London, Paris, Berlin and tell me which two are closest in size.` | planner → researcher×3 → coder → sandbox_executor + formatter | planner → researcher×3 → coder → sandbox_executor + formatter | `Based on current metropolitan area population estimates, the populations of the three cities are approximately 9.1 million for London, 11.418 million for Paris, and 4.0 million for Berlin. Comparing these figures, the two cities closest in size are London and Paris, with a population difference of approximately 2.318 million.` |
+| Planner fails fast with a degenerate 2-node DAG | `Read /nonexistent/path.txt and tell me what's in it.` | planner → formatter | planner → formatter | `I cannot fulfill this request because I do not have access to local file systems or private resources, and the requested file path does not exist within my available data.` |
+| Resumable execution — kill mid-run, resume with `--resume` | `For Lagos, Cairo, and Kinshasa, find current populations and growth rates and tell me which is growing fastest.` | planner → researcher×3 → coder → sandbox_executor + formatter | planner → researcher×3 → coder → sandbox_executor + formatter | `Here is the current population and annual growth rate data for the three cities: City, Estimated Population, Annual Growth Rate; Lagos, ~16.5M – 17.1M, 3.7% – 3.75%; Cairo, ~23.5M (2026), 1.99% – 2.00%; Kinshasa, ~18.5M – 18.6M (2026), 4.36% – 5.13%. Kinshasa is the fastest-growing city among the three, with an average annual growth rate estimated between 4.36% and 5.13%.` |
 
 ---
 
@@ -195,31 +195,30 @@ These eight queries exercise specific capabilities. Run them with `run_additiona
 
 #### Parallel Fan-out
 
-| ID | Query | Expected Skills | Actual Skills | Output |
-|----|-------|-----------------|---------------|--------|
-| `parallel_currencies` | `Find the current exchange rates of USD to EUR, USD to JPY, and USD to GBP. Then tell me which currency gives the most value per dollar.` | planner → researcher×3 → formatter | | |
-| `parallel_tech_companies` | `Find the current market capitalisation of Apple, Microsoft, and Google (Alphabet). Rank them from largest to smallest.` | planner → researcher×3 → formatter | | |
+| Query | Skills | Output |
+|-------|-----------------|--------|
+| `Find the current exchange rates of USD to EUR, USD to JPY, and USD to GBP. Then tell me which currency gives the most value per dollar.` | planner → researcher×3 → coder → formatter + sandbox_executor | `The current exchange rates for 1 USD are as follows: 1 USD = 0.86 EUR, 1 USD = 159.38 JPY, and 1 USD = 0.7457 GBP. Based on these rates, the Japanese Yen (JPY) provides the most value per dollar with a numerical rate of 159.38.` |
+| `Find the current market capitalisation of Apple, Microsoft, and Google (Alphabet). Rank them from largest to smallest.` | planner → researcher×3 → coder → formatter + sandbox_executor | ` Based on current market data, here is the ranking of Apple, Microsoft, and Alphabet (Google) by market capitalization, from largest to smallest: 1. Apple: $4.60 trillion, 2. Alphabet: $4.36 trillion, 3. Microsoft: $2.90 trillion` |
 
 #### Critic Verdict
 
-| ID | Query | Expected Outcome | Actual Skills | Output |
-|----|-------|-----------------|---------------|--------|
-| `critic_pass` | `Fetch https://en.wikipedia.org/wiki/Ada_Lovelace and extract her birth year, death year, and main contribution to computing.` | Critic returns **pass** — all fields present on the page | | |
-| `critic_fail_trigger` | `Fetch https://en.wikipedia.org/wiki/Ada_Lovelace and extract her birth year, death year, her father's full name, and her exact birthplace address. The distiller output must contain all four fields — the critic should fail if the birthplace address is missing.` | Critic returns **fail** (street-level address not on Wikipedia) → recovery Planner fires | | |
+| Query | Skills | Output |
+|-------|---------------|--------|
+| `Fetch https://en.wikipedia.org/wiki/Ada_Lovelace and extract her birth year, death year, and main contribution to computing.` | planner → researcher → distiller → critic (pass) → formatter | `Ada Lovelace was born in 1815 and passed away in 1852. Her main contribution to computing was writing the first computer program intended for Charles Babbage's Analytical Engine.` |
+| `Fetch https://en.wikipedia.org/wiki/Ada_Lovelace and extract her birth year, death year, her father's full name, and her exact birthplace address.` | planner → researcher → distiller → critic (fail) → planner → researcher → distiller → critic (fail) → planner → researcher → distiller → critic (fail) → formatter | `The requested information for Ada Lovelace is as follows: she was born in 1815 and died in 1852. Her father was George Gordon Byron (Lord Byron), and she was born at 12 Piccadilly Terrace, London.` |
 
 #### Coder Computation
 
-| ID | Query | Expected Skills | Actual Skills | Output |
-|----|-------|-----------------|---------------|--------|
-| `coder_compound_interest` | `Calculate how much $10,000 invested at 7% annual interest compounded monthly would grow to after 20 years. Show the final amount and total interest earned.` | planner → coder → sandbox_executor → formatter | | |
-| `coder_fibonacci` | `Compute the first 15 Fibonacci numbers and find which one is closest to 500.` | planner → coder → sandbox_executor → formatter | | |
+| Query | Skills | Output |
+|-------|---------------|--------|
+| `Calculate how much $10,000 invested at 7% annual interest compounded monthly would grow to after 20 years. Show the final amount and total interest earned.` | planner → coder → formatter + sandbox_executor | `If you invest $1,000 at a 7% annual interest rate compounded monthly for 20 years, your investment will grow to a final amount of $4,038.74. The total interest earned over this period will be $3,038.74.` |
+| `Compute the first 15 Fibonacci numbers and find which one is closest to 500.` | planner → coder → formatter + sandbox_executor | `The first 15 Fibonacci numbers are: 0, 1, 1, 2, 3, 5, 8, 13, 21, 34, 55, 89, 144, 233, and 377. Among these, the number closest to 500 is 377.` |
 
 #### Sentiment Analyser
 
-| ID | Query | Expected Skills | Actual Skills | Output |
-|----|-------|-----------------|---------------|--------|
-| `sentiment_product_reviews` | `Search the web for recent user reviews of the iPhone 16 and analyse the overall sentiment. Are customers mostly positive, negative, or mixed about it?` | planner → researcher → sentiment_analyser → formatter | | |
-| `sentiment_climate_article` | `Fetch https://en.wikipedia.org/wiki/Climate_change and analyse the sentiment of the opening content. Is the language alarming, neutral, or optimistic?` | planner → researcher → sentiment_analyser → formatter | | |
+| Query | Skills | Output |
+|-------|---------------|--------|
+| `Search the web for recent user reviews of the iPhone 16 and analyse the overall sentiment. Are customers mostly positive, negative, or mixed about it?` | planner → researcher → sentiment_analyser → formatter | `The overall sentiment toward the iPhone 16 is positive. Users generally view the device as a solid, reliable, and well-rounded upgrade, specifically highlighting improved battery life, enhanced camera capabilities, and significant performance benefits. While there is some ongoing debate regarding the value proposition of the Pro models, the general consensus is that the iPhone 16 successfully narrows the gap in features between standard and premium models.` |
 
 ---
 
