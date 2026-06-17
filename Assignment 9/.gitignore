@@ -1,0 +1,20 @@
+# virtual envs
+.venv/
+
+# python bytecode
+__pycache__/
+*.py[cod]
+
+# secrets
+.env
+.env.*
+!.env.example
+
+# gateway runtime
+*.db
+gateway/static/
+
+# agent runtime (also covered by agent/code/.gitignore)
+agent/code/state/
+agent/code/sandbox/
+agent/code/usage.json
