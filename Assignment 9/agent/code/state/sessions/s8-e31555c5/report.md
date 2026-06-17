@@ -55,7 +55,7 @@ Browser goal: Apply filter for User Rating 7.0+, sort by popularity, and extract
 
 ## Section 5 — Screenshots / Page-State Logs
 
-Refer [Browser Skill Data](/browser)
+Refer [Browser Skill Data](browser)
 
 ────────────────────────────────────────────────────────────────────────
 
@@ -127,14 +127,14 @@ Successful turns : 9
 Total cost       : $0.0000 (providers did not report cost)
 
 Per-node breakdown:
-  Agent                                Provider      Elapsed  Cost
-  ────────────────────────────────────────────────────────────────────────
-  planner(n:1)                         gemini           6.9s  $0.000000
-  browser(imdb_search)                 —               37.1s  $0.000000
-  distiller(distilled_data)            gemini           4.7s  $0.000000
-  critic(n:5)                          groq             4.3s  $0.000000
-  planner(n:6)                         gemini           5.6s  $0.000000
-  browser(imdb_search)                 —               33.8s  $0.000000
-  distiller(distilled_data)            gemini           5.4s  $0.000000
-  formatter(out)                       gemini           5.2s  $0.000000
-  critic(n:10)                         groq             4.3s  $0.000000
+  | Agent | Provider | Elapsed | Cost |
+  | ----- | -------- | ------- | ---- |
+  | planner(n:1) | gemini | 6.9s | $0.000000 |
+  | browser(imdb_search) | — | 37.1s | $0.000000 |
+  | distiller(distilled_data) | gemini | 4.7s | $0.000000 |
+  | critic(n:5) | groq | 4.3s | $0.000000 |
+  | planner(n:6) | gemini | 5.6s | $0.000000 |
+  | browser(imdb_search) | — | 33.8s | $0.000000 |
+  | distiller(distilled_data) | gemini | 5.4s | $0.000000 |
+  | formatter(out) | gemini | 5.2s | $0.000000 |
+  | critic(n:10) | groq | 4.3s | $0.000000 |
