@@ -1,0 +1,53 @@
+[1]<li role="tab">TITLES</li>
+[2]<li role="tab">NAMES</li>
+[3]<li role="tab">COLLABORATIONS</li>
+[4]<button>See results</button>
+[5]<button>TV Short</button>
+[6]<button>Video Game</button>
+[7]<button>Video</button>
+[8]<button>Music Video</button>
+[9]<button>Podcast Series</button>
+[10]<button>Podcast Episode</button>
+[11]<label role="button">Expand Release date</label>
+[12]<label role="button">Collapse IMDb ratings</label>
+[13]<input>Enter IMDb user ratings above</input>
+[14]<input>Enter IMDb user ratings below</input>
+[15]<label role="button">Expand Number of votes</label>
+[16]<label role="button">Collapse Genre</label>
+[17]<button>Action</button>
+[18]<button>Adventure</button>
+[19]<button>Animation</button>
+[20]<button>Biography</button>
+[21]<button>Comedy</button>
+[22]<button>Crime</button>
+[23]<button>Documentary</button>
+[24]<button>Drama</button>
+[25]<button>Family</button>
+[26]<button>Fantasy</button>
+[27]<button>Film-Noir</button>
+[28]<button>Game-Show</button>
+[29]<button>History</button>
+[30]<button>Horror</button>
+[31]<button>Music</button>
+[32]<button>Musical</button>
+[33]<button>Mystery</button>
+[34]<button>News</button>
+[35]<button>Reality-TV</button>
+[36]<button>Romance</button>
+[37]<button>Sci-Fi</button>
+[38]<button>Short</button>
+[39]<button>Sport</button>
+[40]<button>Talk-Show</button>
+[41]<button>Thriller</button>
+[42]<button>War</button>
+[43]<button>Western</button>
+[44]<input>Documentary</input>
+[45]<label>Documentary</label>
+[46]<input>Short</input>
+[47]<label>Short</label>
+[48]<label role="button">Expand Awards & recognition</label>
+[49]<label role="button">Expand Page topics</label>
+[50]<label role="button">Expand Companies</label>
+[51]<label role="button">Expand Instant watch options</label>
+[52]<label role="button">Expand US certificates</label>
+[53]<a>Search for names instead.</a>

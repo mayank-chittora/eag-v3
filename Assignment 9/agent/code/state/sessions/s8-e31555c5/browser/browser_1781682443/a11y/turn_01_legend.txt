@@ -1,0 +1,40 @@
+[1]<a>Home</a>
+[2]<label>Open navigation drawer</label>
+[3]<label>All</label>
+[4]<div role="combobox">Search IMDb</div>
+[5]<button>Submit search</button>
+[6]<a>Go To IMDb Pro</a>
+[7]<a>Watchlist</a>
+[8]<a>Sign in</a>
+[9]<a>Sign in</a>
+[10]<button>Close</button>
+[11]<a>Create account</a>
+[12]<label>Toggle language selector</label>
+[13]<li role="tab">TITLES</li>
+[14]<li role="tab">NAMES</li>
+[15]<li role="tab">COLLABORATIONS</li>
+[16]<button>Sci-Fi</button>
+[17]<button>Expand all</button>
+[18]<label role="button">Expand Title name</label>
+[19]<label role="button">Expand Title type</label>
+[20]<label role="button">Expand Release date</label>
+[21]<label role="button">Expand IMDb ratings</label>
+[22]<label role="button">Expand Number of votes</label>
+[23]<label role="button">Expand Genre</label>
+[24]<label>Sort by</label>
+[25]<button>Ascending sort order</button>
+[26]<button>Selected: Detailed view</button>
+[27]<button>Grid view</button>
+[28]<button>Compact view</button>
+[29]<div role="button">Add to Watchlist</div>
+[30]<a>View title page for Disclosure Day</a>
+[31]<a>1. Disclosure Day</a>
+[32]<button>Rate Disclosure Day</button>
+[33]<button>Mark Disclosure Day as watched</button>
+[34]<button>See more information about Disclosure Day</button>
+[35]<div role="button">Add to Watchlist</div>
+[36]<a>View title page for Backrooms</a>
+[37]<a>2. Backrooms</a>
+[38]<button>Rate Backrooms</button>
+[39]<button>Mark Backrooms as watched</button>
+[40]<button>See more information about Backrooms</button>

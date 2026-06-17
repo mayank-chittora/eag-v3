@@ -14,7 +14,3 @@ __pycache__/
 *.db
 gateway/static/
 
-# agent runtime (also covered by agent/code/.gitignore)
-agent/code/state/
-agent/code/sandbox/
-agent/code/usage.json

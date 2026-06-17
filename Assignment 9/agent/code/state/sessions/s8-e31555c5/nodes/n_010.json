@@ -1,0 +1,28 @@
+{
+  "node_id": "n:10",
+  "skill": "critic",
+  "status": "complete",
+  "inputs": [
+    "USER_QUERY",
+    "n:8"
+  ],
+  "result": {
+    "success": true,
+    "agent_name": "critic",
+    "output": {
+      "verdict": "pass",
+      "rationale": "The output contains three Sci-Fi movies with IMDb ratings above 7.0, matching the user's query."
+    },
+    "artifacts": [],
+    "successors": [],
+    "cost": 0.0,
+    "elapsed_s": 4.319413661956787,
+    "provider": "groq",
+    "error": null,
+    "error_code": null
+  },
+  "prompt_sent": "You are the Critic skill. You evaluate one upstream node's output and\nreturn pass-or-fail with a short rationale.\n\nYou make no tool calls. The upstream output and (when the orchestrator\nhas it) the inputs that node received both appear in the prompt.\n\nProcedure:\n  1. Read the UPSTREAM_OUTPUT.\n  2. Check it against the INPUTS that produced it.\n  3. Look for: fabricated fields, claims unsupported by the input,\n     contradictions, missing fields the input clearly contained.\n  4. Emit pass or fail.\n\nOutput schema (JSON, no prose, no markdown fences):\n\n  {\n    \"verdict\": \"pass\" | \"fail\",\n    \"rationale\": \"<one or two short sentences>\"\n  }\n\nWhen you emit `fail`, the orchestrator may invoke the Planner to\nrecover. Be specific in your rationale so the recovery plan can be\ntargeted. Do not fail for stylistic reasons; only fail when the\nupstream output is wrong, missing, or unsupported.\n\nUSER_QUERY: Compare 3 movies on IMDb in the Sci-Fi genre with IMDb rating above 7.0.\n\nINPUTS:\n[\n  {\n    \"id\": \"USER_QUERY\",\n    \"kind\": \"query\",\n    \"value\": \"Compare 3 movies on IMDb in the Sci-Fi genre with IMDb rating above 7.0.\"\n  },\n  {\n    \"id\": \"n:8\",\n    \"kind\": \"upstream\",\n    \"skill\": \"distiller\",\n    \"output\": {\n      \"fields\": {\n        \"movie_1\": {\n          \"title\": \"Inception\",\n          \"rating\": \"8.8\",\n          \"description\": \"A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.\"\n        },\n        \"movie_2\": {\n          \"title\": \"Interstellar\",\n          \"rating\": \"8.7\",\n          \"description\": \"When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.\"\n        },\n        \"movie_3\": {\n          \"title\": \"The Matrix\",\n          \"rating\": \"8.7\",\n          \"description\": \"When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the shocking truth--the life he knows is the elaborate deception of an evil cyber-intelligence.\"\n        }\n      },\n      \"rationale\": \"The top 3 Sci-Fi movies and their details were extracted directly from the final turn output of the browser node (n:7).\"\n    }\n  }\n]",
+  "started_at": 1781682534.1407998,
+  "completed_at": 1781682538.4602134,
+  "retries": 0
+}

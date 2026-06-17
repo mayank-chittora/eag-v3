@@ -3,11 +3,6 @@
 .env.*
 !.env.example
 
-# runtime state
-state/
-sandbox/
-usage.json
-
 # python
 __pycache__/
 *.py[cod]

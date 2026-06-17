@@ -1,0 +1,46 @@
+[1]<a>Home</a>
+[2]<label>Open navigation drawer</label>
+[3]<label>All</label>
+[4]<div role="combobox">Search IMDb</div>
+[5]<button>Submit search</button>
+[6]<a>Go To IMDb Pro</a>
+[7]<a>Watchlist</a>
+[8]<a>Sign in</a>
+[9]<a>Sign in</a>
+[10]<button>Close</button>
+[11]<a>Create account</a>
+[12]<label>Toggle language selector</label>
+[13]<a>help site</a>
+[14]<a>FAQs.</a>
+[15]<li role="tab">TITLES</li>
+[16]<li role="tab">NAMES</li>
+[17]<li role="tab">COLLABORATIONS</li>
+[18]<button>See results</button>
+[19]<button>Expand all</button>
+[20]<label role="button">Expand Title name</label>
+[21]<label role="button">Collapse Title type</label>
+[22]<button>Movie</button>
+[23]<button>TV Series</button>
+[24]<button>Short</button>
+[25]<button>TV Episode</button>
+[26]<button>TV Mini Series</button>
+[27]<button>TV Movie</button>
+[28]<button>TV Special</button>
+[29]<button>TV Short</button>
+[30]<button>Video Game</button>
+[31]<button>Video</button>
+[32]<button>Music Video</button>
+[33]<button>Podcast Series</button>
+[34]<button>Podcast Episode</button>
+[35]<label role="button">Expand Release date</label>
+[36]<label role="button">Expand IMDb ratings</label>
+[37]<label role="button">Expand Number of votes</label>
+[38]<label role="button">Collapse Genre</label>
+[39]<button>Action</button>
+[40]<button>Adventure</button>
+[41]<button>Animation</button>
+[42]<button>Biography</button>
+[43]<button>Comedy</button>
+[44]<button>Crime</button>
+[45]<button>Documentary</button>
+[46]<button>Drama</button>

@@ -1,0 +1,55 @@
+[1]<li role="tab">TITLES</li>
+[2]<li role="tab">NAMES</li>
+[3]<li role="tab">COLLABORATIONS</li>
+[4]<button>Sci-Fi</button>
+[5]<button>IMDb ratings: 7.0 or above</button>
+[6]<label role="button">Expand Number of votes</label>
+[7]<label role="button">Expand Genre</label>
+[8]<label role="button">Expand Awards & recognition</label>
+[9]<label role="button">Expand Page topics</label>
+[10]<label role="button">Expand Companies</label>
+[11]<label role="button">Expand Instant watch options</label>
+[12]<label role="button">Expand US certificates</label>
+[13]<label role="button">Expand Color info</label>
+[14]<label role="button">Expand Country</label>
+[15]<label role="button">Expand Keywords</label>
+[16]<label role="button">Expand Languages</label>
+[17]<label role="button">Expand IMDb popularity rank</label>
+[18]<label role="button">Expand Cast or crew</label>
+[19]<label role="button">Expand Characters</label>
+[20]<label role="button">Expand Runtime</label>
+[21]<label role="button">Expand Sound mix</label>
+[22]<label role="button">Expand In theaters</label>
+[23]<label role="button">Expand Adult titles</label>
+[24]<a>View title page for Masters of the Universe</a>
+[25]<button>Rate Masters of the Universe</button>
+[26]<button>Mark Masters of the Universe as watched</button>
+[27]<button>See more information about Masters of the Universe</button>
+[28]<div role="button">Add to Watchlist</div>
+[29]<a>View title page for From</a>
+[30]<a>3. From</a>
+[31]<button>Rate From</button>
+[32]<button>Mark From as watched</button>
+[33]<button>See more information about From</button>
+[34]<div role="button">Add to Watchlist</div>
+[35]<a>View title page for Spider-Noir</a>
+[36]<a>4. Spider-Noir</a>
+[37]<button>Rate Spider-Noir</button>
+[38]<button>Mark Spider-Noir as watched</button>
+[39]<button>See more information about Spider-Noir</button>
+[40]<div role="button">Add to Watchlist</div>
+[41]<a>View title page for The Boroughs</a>
+[42]<a>5. The Boroughs</a>
+[43]<button>Rate The Boroughs</button>
+[44]<button>Mark The Boroughs as watched</button>
+[45]<button>See more information about The Boroughs</button>
+[46]<div role="button">Add to Watchlist</div>
+[47]<a>View title page for Project Hail Mary</a>
+[48]<a>6. Project Hail Mary</a>
+[49]<button>Rate Project Hail Mary</button>
+[50]<button>Mark Project Hail Mary as watched</button>
+[51]<button>See more information about Project Hail Mary</button>
+[52]<div role="button">Add to Watchlist</div>
+[53]<a>View title page for The Boys</a>
+[54]<a>7. The Boys</a>
+[55]<button>See more information about The Boys</button>

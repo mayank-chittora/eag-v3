@@ -1,0 +1,1 @@
+Compare 3 movies on IMDb in the Sci-Fi genre with IMDb rating above 7.0.

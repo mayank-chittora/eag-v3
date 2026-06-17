@@ -1,0 +1,27 @@
+{
+  "node_id": "n:9",
+  "skill": "formatter",
+  "status": "complete",
+  "inputs": [
+    "USER_QUERY",
+    "n:8"
+  ],
+  "result": {
+    "success": true,
+    "agent_name": "formatter",
+    "output": {
+      "final_answer": "Here is a comparison of three highly-rated Sci-Fi movies on IMDb:\n\n1. Inception (Rating: 8.8): A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.\n\n2. Interstellar (Rating: 8.7): When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.\n\n3. The Matrix (Rating: 8.7): When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the shocking truth--the life he knows is the elaborate deception of an evil cyber-intelligence."
+    },
+    "artifacts": [],
+    "successors": [],
+    "cost": 0.0,
+    "elapsed_s": 5.225879192352295,
+    "provider": "gemini",
+    "error": null,
+    "error_code": null
+  },
+  "prompt_sent": "You are the Formatter skill. You are the conventional TERMINAL node of\nevery DAG. Your job is to produce the final user-facing answer from\nwhatever upstream nodes have provided.\n\nYou make no tool calls. The user's original query appears under\nUSER_QUERY. Upstream results appear under INPUTS.\n\nProcedure:\n  1. Read USER_QUERY.\n  2. Read INPUTS and decide which fields / findings answer the query.\n  3. Write the user-facing answer in plain English. Adapt the format\n     (numbered list, comparison table, one paragraph) to what the\n     question actually asked.\n\nOutput schema (JSON, no prose, no markdown fences):\n\n  {\n    \"final_answer\": \"<the answer the user sees>\"\n  }\n\nRules:\n  - This is the LAST node. Do not add successors.\n  - The answer must be answerable from INPUTS alone. If an upstream\n    node returned `(not found)` or marked itself failed, say so plainly\n    to the user rather than inventing.\n  - Cite sources only when an upstream node included them (Researcher\n    nodes do; Retriever nodes do). Do not invent URLs.\n\nUSER_QUERY: Compare 3 movies on IMDb in the Sci-Fi genre with IMDb rating above 7.0.\n\nINPUTS:\n[\n  {\n    \"id\": \"USER_QUERY\",\n    \"kind\": \"query\",\n    \"value\": \"Compare 3 movies on IMDb in the Sci-Fi genre with IMDb rating above 7.0.\"\n  },\n  {\n    \"id\": \"n:8\",\n    \"kind\": \"upstream\",\n    \"skill\": \"distiller\",\n    \"output\": {\n      \"fields\": {\n        \"movie_1\": {\n          \"title\": \"Inception\",\n          \"rating\": \"8.8\",\n          \"description\": \"A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.\"\n        },\n        \"movie_2\": {\n          \"title\": \"Interstellar\",\n          \"rating\": \"8.7\",\n          \"description\": \"When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.\"\n        },\n        \"movie_3\": {\n          \"title\": \"The Matrix\",\n          \"rating\": \"8.7\",\n          \"description\": \"When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the shocking truth--the life he knows is the elaborate deception of an evil cyber-intelligence.\"\n        }\n      },\n      \"rationale\": \"The top 3 Sci-Fi movies and their details were extracted directly from the final turn output of the browser node (n:7).\"\n    }\n  }\n]",
+  "started_at": 1781682538.4831595,
+  "completed_at": 1781682543.7090387,
+  "retries": 0
+}

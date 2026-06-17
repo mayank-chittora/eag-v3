@@ -1,0 +1,23 @@
+[1]<a>Home</a>
+[2]<label>Open navigation drawer</label>
+[3]<label>All</label>
+[4]<div role="combobox">Search IMDb</div>
+[5]<button>Submit search</button>
+[6]<a>Go To IMDb Pro</a>
+[7]<a>Watchlist</a>
+[8]<a>Sign in</a>
+[9]<label>Toggle language selector</label>
+[10]<span role="button">Get information, provide feedback or report sponsored ad</span>
+[11]<li role="tab">TITLES</li>
+[12]<li role="tab">NAMES</li>
+[13]<li role="tab">COLLABORATIONS</li>
+[14]<button>Sci-Fi</button>
+[15]<button>IMDb ratings: 7.0 or above</button>
+[16]<button>Expand all</button>
+[17]<label role="button">Expand Title name</label>
+[18]<label role="button">Expand Title type</label>
+[19]<label role="button">Expand Release date</label>
+[20]<label role="button">Collapse IMDb ratings</label>
+[21]<input>Enter IMDb user ratings above</input>
+[22]<input>Enter IMDb user ratings below</input>
+[23]<label role="button">Expand Number of votes</label>
