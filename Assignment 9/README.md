@@ -146,9 +146,7 @@ session s8-e31555c5  ─  query: Compare 3 movies on IMDb in the Sci-Fi genre wi
 FINAL: Here is a comparison of three highly-rated Sci-Fi movies on IMDb:
 
 1. Inception (Rating: 8.8): A thief who steals corporate secrets through the use of dream-sharing technology is given the inverse task of planting an idea into the mind of a C.E.O.
-
 2. Interstellar (Rating: 8.7): When Earth becomes uninhabitable in the future, a farmer and ex-NASA pilot, Joseph Cooper, is tasked to pilot a spacecraft, along with a team of researchers, to find a new planet for humans.
-
 3. The Matrix (Rating: 8.7): When a beautiful stranger leads computer hacker Neo to a forbidding underworld, he discovers the sh
 ══════════════════════════════════════════════════════════════════════════════
 
