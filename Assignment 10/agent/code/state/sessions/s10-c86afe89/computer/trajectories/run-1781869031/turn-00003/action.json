@@ -1,0 +1,13 @@
+{
+  "arguments": {
+    "action": "execute_javascript",
+    "javascript": "(()=>{const c=document.getElementById('board');if(!c)return 'no-canvas';const r=c.getBoundingClientRect();const CELL=120;const cx=r.left+0*CELL+CELL/2;const cy=r.top+0*CELL+CELL/2;['mousedown','mouseup','click'].forEach(t=>c.dispatchEvent(new MouseEvent(t,{bubbles:true,cancelable:true,clientX:cx,clientY:cy})));return 'cell(0,0) vp=('+Math.round(cx)+','+Math.round(cy)+')';})()",
+    "pid": 8876,
+    "window_id": 199630
+  },
+  "result_summary": "cdp.runtime.evaluate.user_gesture: \"cell(0,0) vp=(394,253)\"",
+  "t_ms_from_session_start": 8083,
+  "t_start_ms_from_session_start": 7830,
+  "timestamp": "1781869039.586",
+  "tool": "page"
+}

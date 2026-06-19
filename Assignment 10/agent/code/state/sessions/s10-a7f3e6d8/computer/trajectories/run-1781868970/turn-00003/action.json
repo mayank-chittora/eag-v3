@@ -1,0 +1,13 @@
+{
+  "arguments": {
+    "action": "execute_javascript",
+    "javascript": "(async()=>{const wb=document.querySelector('.monaco-workbench')||document.body;['keydown','keyup'].forEach(t=>wb.dispatchEvent(new KeyboardEvent(t,{key:'n',keyCode:78,ctrlKey:true,bubbles:true,cancelable:true})));await new Promise(r=>setTimeout(r,1200));return 'dispatched Ctrl+N, title='+document.title;})()",
+    "pid": 21356,
+    "window_id": 1181966
+  },
+  "result_summary": "cdp.runtime.evaluate.user_gesture: \"dispatched Ctrl+N, title=Untitled-2 - Visual Studio Code\"",
+  "t_ms_from_session_start": 6910,
+  "t_start_ms_from_session_start": 5448,
+  "timestamp": "1781868977.264",
+  "tool": "page"
+}

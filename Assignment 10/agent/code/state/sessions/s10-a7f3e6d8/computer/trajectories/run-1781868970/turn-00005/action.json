@@ -1,0 +1,12 @@
+{
+  "arguments": {
+    "action": "get_text",
+    "pid": 21356,
+    "window_id": 1181966
+  },
+  "result_summary": "￼\n￼\n￼\n￼\n￼\nFile\nEdit\nSelection\nView\nGo\nRun\nMore\n\n\nSearch\n\nMore Actions\nSign In\nOpen in Agents\n￼\n\n\n\n\n￼\n￼\n￼\n\n2\n￼\n\n￼\n\n￼\n\n￼\n\n￼\nClaude Code\n￼\nPython\n￼\n\n￼\n\n￼\n￼\n￼\n￼\nWelcome\n\n\nbbUntitled-1\n\n￼\n\nbUntitled-2\n\n￼\nClaude Code: Open\n\n\nThe editor is not accessible at this time. To enable screen reader optimized mode, use Shift+Alt+F1\n￼\n￼\n￼\nCHAT\n￼\n\n￼\n\nNew Chat\n\nViews and More Actions...\n￼\n\n\n￼\n\nBuild with Agent\nAI responses may be inaccurate\nGenerate Agent Instructions to onboard AI onto your codebase.\n￼\n￼\n￼\n\n\nb\nThe editor is not accessible at this time. To enable screen reader optimized mode, use Shift+Alt+F1\n￼\n￼\n\n\nAuto\n\n\n￼\n\nLocal\n\nDefault Approvals\n￼\n\n\n 0 \n\n 0\n\n\nPlain Text\n\nCRLF\nUTF-8\nSpaces: 4\nLn 1, Col 2\n￼\n￼\n￼\n￼\n￼",
+  "t_ms_from_session_start": 8102,
+  "t_start_ms_from_session_start": 8088,
+  "timestamp": "1781868978.457",
+  "tool": "page"
+}

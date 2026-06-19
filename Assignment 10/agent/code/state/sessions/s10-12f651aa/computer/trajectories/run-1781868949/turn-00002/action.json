@@ -1,0 +1,11 @@
+{
+  "arguments": {
+    "pid": 6804,
+    "window_id": 2165160
+  },
+  "result_summary": "✅ bring_to_front: pid 6804 hwnd 0x2109a8 is now foreground (was 0x1906ee).",
+  "t_ms_from_session_start": 2815,
+  "t_start_ms_from_session_start": 2798,
+  "timestamp": "1781868952.187",
+  "tool": "bring_to_front"
+}

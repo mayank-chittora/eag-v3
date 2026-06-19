@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Tic-Tac-Toe — Computer-Use Vision Task</title>
+<style>
+  body {
+    background: #1a1a2e;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    margin: 0;
+    font-family: 'Segoe UI', sans-serif;
+    color: #eee;
+  }
+  h1 { font-size: 1.6rem; margin-bottom: 0.4rem; letter-spacing: 1px; }
+  #status {
+    font-size: 1.1rem;
+    margin-bottom: 1rem;
+    min-height: 1.5em;
+    color: #a0cfff;
+  }
+  canvas {
+    border: 3px solid #a0cfff;
+    border-radius: 8px;
+    cursor: pointer;
+    background: #16213e;
+  }
+  #reset {
+    margin-top: 1.2rem;
+    padding: 0.5rem 1.8rem;
+    font-size: 1rem;
+    background: #0f3460;
+    color: #eee;
+    border: 2px solid #a0cfff;
+    border-radius: 6px;
+    cursor: pointer;
+  }
+  #reset:hover { background: #1a5276; }
+</style>
+</head>
+<body>
+<h1>Tic-Tac-Toe</h1>
+<div id="status">X's turn — click a cell</div>
+<canvas id="board" width="360" height="360"></canvas>
+<button id="reset">New Game</button>
+
+<script>
+const canvas = document.getElementById('board');
+const ctx    = canvas.getContext('2d');
+const status = document.getElementById('status');
+const CELL   = 120;
+let board, turn, over;
+
+function init() {
+  board = Array(9).fill('');
+  turn  = 'X';
+  over  = false;
+  status.textContent = "X's turn — click a cell";
+  draw();
+}
+
+function draw() {
+  ctx.clearRect(0, 0, 360, 360);
+
+  // Grid lines
+  ctx.strokeStyle = '#a0cfff';
+  ctx.lineWidth   = 4;
+  [1, 2].forEach(i => {
+    ctx.beginPath(); ctx.moveTo(i * CELL, 10); ctx.lineTo(i * CELL, 350); ctx.stroke();
+    ctx.beginPath(); ctx.moveTo(10, i * CELL); ctx.lineTo(350, i * CELL); ctx.stroke();
+  });
+
+  // Marks
+  board.forEach((v, i) => {
+    const col = i % 3, row = Math.floor(i / 3);
+    const cx  = col * CELL + CELL / 2;
+    const cy  = row * CELL + CELL / 2;
+    if (v === 'X') {
+      ctx.strokeStyle = '#e74c3c';
+      ctx.lineWidth   = 6;
+      const off = 35;
+      ctx.beginPath(); ctx.moveTo(cx - off, cy - off); ctx.lineTo(cx + off, cy + off); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(cx + off, cy - off); ctx.lineTo(cx - off, cy + off); ctx.stroke();
+    } else if (v === 'O') {
+      ctx.strokeStyle = '#2ecc71';
+      ctx.lineWidth   = 6;
+      ctx.beginPath(); ctx.arc(cx, cy, 38, 0, 2 * Math.PI); ctx.stroke();
+    }
+  });
+}
+
+function winner() {
+  const lines = [[0,1,2],[3,4,5],[6,7,8],[0,3,6],[1,4,7],[2,5,8],[0,4,8],[2,4,6]];
+  for (const [a,b,c] of lines)
+    if (board[a] && board[a] === board[b] && board[a] === board[c]) return board[a];
+  if (board.every(v => v)) return 'draw';
+  return null;
+}
+
+canvas.addEventListener('click', e => {
+  if (over) return;
+  const rect = canvas.getBoundingClientRect();
+  const col  = Math.floor((e.clientX - rect.left)  / CELL);
+  const row  = Math.floor((e.clientY - rect.top)   / CELL);
+  const idx  = row * 3 + col;
+  if (board[idx]) return;
+
+  board[idx] = turn;
+  draw();
+
+  const w = winner();
+  if (w) {
+    over = true;
+    status.textContent = w === 'draw' ? "It's a draw!" : `${w} wins! 🎉`;
+    return;
+  }
+  turn = turn === 'X' ? 'O' : 'X';
+  status.textContent = `${turn}'s turn — click a cell`;
+});
+
+document.getElementById('reset').addEventListener('click', init);
+
+init();
+</script>
+</body>
+</html>

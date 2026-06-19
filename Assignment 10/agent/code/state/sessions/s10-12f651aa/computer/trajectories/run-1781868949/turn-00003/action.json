@@ -1,0 +1,16 @@
+{
+  "arguments": {
+    "element_index": 0,
+    "pid": 6804,
+    "window_id": 2165160
+  },
+  "click_point": {
+    "x": 284.0,
+    "y": 21.0
+  },
+  "result_summary": "✅ Performed PostMessage click on [0] (screen (342,21)).",
+  "t_ms_from_session_start": 3730,
+  "t_start_ms_from_session_start": 3692,
+  "timestamp": "1781868953.159",
+  "tool": "click"
+}

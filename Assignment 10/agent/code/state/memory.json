@@ -1,0 +1,45 @@
+[
+  {
+    "id": "mem:2c3ce6fb",
+    "kind": "scratchpad",
+    "keywords": [
+      "compute",
+      "math",
+      "calculation",
+      "arithmetic"
+    ],
+    "descriptor": "Compute the result of (15 + 25) * 3",
+    "value": {
+      "raw": "Compute (15 + 25) * 3 via computer skill"
+    },
+    "artifact_id": null,
+    "embedding": null,
+    "source": "user_query",
+    "run_id": "s8-ff149672",
+    "goal_id": null,
+    "confidence": 1.0,
+    "created_at": "2026-06-19T09:24:38.220458"
+  },
+  {
+    "id": "mem:31b2cbd1",
+    "kind": "scratchpad",
+    "keywords": [
+      "calculator",
+      "compute",
+      "math",
+      "calculation",
+      "expression"
+    ],
+    "descriptor": "Calculation request for (15 + 25) * 3 using the Calculator app",
+    "value": {
+      "raw": "Use Calculator app and compute (15 + 25) * 3"
+    },
+    "artifact_id": null,
+    "embedding": null,
+    "source": "user_query",
+    "run_id": "s8-b1b614f0",
+    "goal_id": null,
+    "confidence": 1.0,
+    "created_at": "2026-06-19T09:26:01.713303"
+  }
+]

@@ -1,0 +1,11 @@
+{
+  "arguments": {
+    "pid": 8876,
+    "window_id": 199630
+  },
+  "result_summary": "✅ bring_to_front: pid 8876 hwnd 0x30bce is now foreground (was 0x30bce).",
+  "t_ms_from_session_start": 2936,
+  "t_start_ms_from_session_start": 2935,
+  "timestamp": "1781869034.437",
+  "tool": "bring_to_front"
+}
