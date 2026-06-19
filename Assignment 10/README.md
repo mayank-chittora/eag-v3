@@ -1,6 +1,6 @@
-# Assignment 10 — Computer-Use Skill
+# Multi-agent Orchestrator with Computer-Use Skill
 
-A **Computer-Use skill** that slots into the Assignment 9 multi-agent orchestrator and drives real desktop applications via [`cua-driver`](https://github.com/trycua/cua). The skill follows the same five-layer cascade pattern as the S9 Browser skill and uses the V9 gateway for all LLM and vision calls.
+A **Computer-Use skill** that slots into the multi-agent orchestrator and drives real desktop applications via [`cua-driver`](https://github.com/trycua/cua). The skill follows the same five-layer cascade pattern as the Browser skill and uses the gateway for all LLM and vision calls.
 
 ---
 
@@ -11,20 +11,20 @@ A **Computer-Use skill** that slots into the Assignment 9 multi-agent orchestrat
 The cascade tries the cheapest layer first and escalates only when the current layer cannot complete the goal.
 
 ```
-┌──────────────────────────────────────────────────────────────┐
-│  ComputerSkill.run(NodeSpec)                                  │
-│                                                               │
-│  Pre-condition: ensure_daemon()  +  activate_window()         │
-│  Recording:    start_recording() ... stop_recording()         │
-│                                                               │
-│  Layer 1  ─ Extract ──────────────── AX tree read-only        │  $0 / 0 LLM
-│  Layer 2a ─ Deterministic ─────────── press_key / hotkey seq  │  $0 / 0 LLM
-│  Layer 2b ─ A11y + LLM ────────────── AX tree + text LLM      │  cents / turn
+┌────────────────────────────────────────────────────────────────┐
+│  ComputerSkill.run(NodeSpec)                                   │
+│                                                                │
+│  Pre-condition: ensure_daemon()  +  activate_window()          │
+│  Recording:    start_recording() ... stop_recording()          │
+│                                                                │
+│  Layer 1  ─ Extract ──────────────── AX tree read-only         │  $0 / 0 LLM
+│  Layer 2a ─ Deterministic ─────────── press_key / hotkey seq   │  $0 / 0 LLM
+│  Layer 2b ─ A11y + LLM ────────────── AX tree + text LLM       │  cents / turn
 │  Layer 2b-E─ Electron / CDP ────────── page tool via DevTools  │  cents / turn
-│  Layer 3  ─ Vision ─────────────────── screenshot + vision LLM│  ~10× layer 2b
-│                                                               │
-│  Each layer returns success=True or passes to the next layer  │
-└──────────────────────────────────────────────────────────────┘
+│  Layer 3  ─ Vision ─────────────────── screenshot + vision LLM │  ~10× layer 2b
+│                                                                │
+│  Each layer returns success=True or passes to the next layer   │
+└────────────────────────────────────────────────────────────────┘
                               │
                       cua-driver daemon
                     (cua-driver serve)
@@ -43,20 +43,20 @@ The cascade tries the cheapest layer first and escalates only when the current l
 
 ### Scan-Act-Verify Loop (Layer 2b)
 
-The course's two invariants are enforced in `computer/skill.py`:
+Below two invariants are enforced in `computer/skill.py`:
 
 1. **One scan per turn before any element_index action** — `scan()` in `driver.py` builds the element-index cache and guards `element_count == 0`.
 2. **Re-scan after every state change** — every `_dispatch_action` call is followed by a new `scan()` at the top of the next loop iteration.
 
-### Integration into the S9 Orchestrator
+### Integration into the Orchestrator
 
-Only two files changed from S9:
+Only two files changed:
 
 **`agent_config.yaml`** — added the `computer:` skill entry (same shape as `browser:`).
 
 **`skills.py`** — added one `if skill.name == "computer":` dispatch branch (identical pattern to the `browser` branch).
 
-The `computer/` package is self-contained alongside `browser/`. The V9 gateway, schemas, flow, replay viewer, and cost ledger are all unchanged from S9.
+The `computer/` package is self-contained alongside `browser/`. The gateway, schemas, flow, replay viewer, and cost ledger are all unchanged.
 
 ---
 
@@ -130,10 +130,10 @@ cua-driver serve
 # Verify with: cua-driver status
 ```
 
-### 4. Start the V9 gateway (from Assignment 9)
+### 4. Start the gateway
 
 ```bash
-cd "../Assignment 9/gateway"
+cd "gateway"
 uv run main.py
 # Starts on http://localhost:8109
 ```
@@ -180,7 +180,7 @@ Each trajectory contains every `(tool, args)` pair recorded by `start_recording`
 
 ## Full Orchestrator Integration
 
-The computer skill also works via the S9 flow.py orchestrator:
+The computer skill also works via the flow.py orchestrator:
 
 ```bash
 cd "agent/code"
@@ -207,9 +207,9 @@ Assignment 10/
 │   │   └── computer.md    # Planner description for computer nodes
 │   ├── tasks/
 │   │   └── canvas_game.html  # Local HTML canvas tic-tac-toe (Task 3 target)
-│   ├── agent_config.yaml  # S9 config + computer skill entry
-│   ├── skills.py          # S9 skills + computer dispatch branch
+│   ├── agent_config.yaml  # config + computer skill entry
+│   ├── skills.py          # skills + computer dispatch branch
 │   └── run_demo.py        # Standalone demo runner
-├── gateway/               # S9 V9 gateway (unchanged)
+├── gateway/               # gateway
 └── README.md              # This file
 ```
